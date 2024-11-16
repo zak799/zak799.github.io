@@ -1,1 +1,1 @@
-# zak799.github.io
+<link rel="manifest" href="/manifest.json">
