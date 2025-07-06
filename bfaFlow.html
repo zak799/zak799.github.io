@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Black Flag Association</title>
+  <link href="src/flowbite.css" rel="stylesheet" />
+  <script src="src/flowbite.js"></script>
+  <link rel="stylesheet" href="src/bulma.css">
+  <script src="https://kit.fontawesome.com/43b9b945db.js" crossorigin="anonymous"></script>
+  <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
+  <link rel="shortcut icon" href="favicon/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
+  <link rel="manifest" href="favicon/site.webmanifest" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet">
+  <meta name="description" content="Black Flag Association – No silence. No sponsors. Builders, riders, rebels."/>
+
+  <style>
+    html{
+        background-color: white;
+    }
+    .navbar-burger {
+      display: block !important;
+      margin-right: 0.5rem;
+      z-index: 999;
+    }
+
+    .navbar-end {
+      margin-left: auto;
+    }
+
+    /* Sidebar styling */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -250px;
+      width: 250px;
+      height: 100%;
+      background-color: #f5f5f5;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+      padding: 1rem;
+      transition: left 0.3s ease;
+      z-index: 1000;
+    }
+
+    .sidebar.is-active {
+      left: 0;
+    }
+
+    .sidebar-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.4);
+      z-index: 999;
+    }
+
+    .sidebar-overlay.is-active {
+      display: block;
+    }
+
+    .navbar-item img {
+        max-height: 80px; /* or whatever height you want */
+        width: auto;
+        height: 60px;
+    }
+
+    .navbar-end .navbar-item {
+    font-size: 1.2rem;
+    font-weight: 500;
+    }
+
+#nav{
+    position: sticky;
+    top: 0;
+    height: 2rem;
+}
+
+
+  @media (max-width: 767px) {
+    .nav-container {
+      position: relative;
+    }
+
+    .hamburger-logo-wrapper {
+      flex: 1;
+      justify-content: flex-start; /* hamburger left */
+    }
+
+    .logo-link {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      pointer-events: none; /* So clicks go through the logo if needed */
+    }
+  }
+
+  /* Desktop: hamburger + logo stuck left together */
+  @media (min-width: 768px) {
+    .hamburger-logo-wrapper {
+      flex: initial;
+      justify-content: flex-start;
+    }
+
+    .logo-link {
+      position: static;
+      transform: none;
+      pointer-events: auto;
+    }
+  }
+
+#navB{
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  position: sticky;
+}
+
+a{
+  color: black;
+}
+a:hover{
+  color: #ffffff;
+  background-color: rgba(0,0,0,0.4);
+}
+
+#logo1:hover{
+  background-color: transparent;
+}
+</style>
+
+
+
+
+
+</head>
+<body>
+
+<nav class="sticky bg-white border-gray-200 dark:bg-gray-300" id="navB" style="padding: 0px; position: fixed; top: 0; width: 100%; z-index: 1100; height: 6rem;">
+  <div class="max-w-screen-l flex flex-wrap justify-between  p-5">
+
+    <!-- Hamburger + Dropdown (Left) -->
+    <div class="flex items-left" style="margin-top: -2.3rem;">
+    <div class="navbar-brand" >
+        <a role="button" class="navbar-burger" aria-label="menu" id="sidebarToggle" style="color: #000000">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        </a>
+    </div>
+    <div class="sidebar" id="sidebar">
+        <button id="sidebarClose" class="delete" aria-label="close" style="position: absolute; top: 1rem; right: 1rem;"></button>
+    <p class="menu-label">Menu - External Links</p>
+    <ul class="menu-list" style="font-size: larger; color: black; padding: 30px;">
+        <li><a style="padding: 10px; border-radius: 5px;">PROJECTS</a></li><br>
+        <li><a style="padding: 10px; border-radius: 5px;">THE TEAM</a></li><br>
+        <li><a style="padding: 10px; border-radius: 5px;">HOME</a></li><br>
+        <li><a style="padding: 10px; border-radius: 5px;">SHOP</a></li><br>
+        <li><a style="padding: 10px; border-radius: 5px;">GALLERY</a></li>
+    </ul>
+    </div>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <script>
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('sidebarOverlay');
+  const toggle = document.getElementById('sidebarToggle');
+
+  toggle.addEventListener('click', () => {
+    sidebar.classList.toggle('is-active');
+    overlay.classList.toggle('is-active');
+  });
+
+  overlay.addEventListener('click', () => {
+    sidebar.classList.remove('is-active');
+    overlay.classList.remove('is-active');
+  });
+
+  const closeBtn = document.getElementById('sidebarClose');
+
+  closeBtn.addEventListener('click', () => {
+    sidebar.classList.remove('is-active');
+    overlay.classList.remove('is-active');
+  });
+</script>
+
+      <!-- Logo -->
+        <img src="assets/logo/bfaLogo.png" style="transform: scale(0.7); padding: 0px;" id="logo1"/>
+    </div>
+
+    <!-- Mobile nav toggle (Right) -->
+    <button data-collapse-toggle="navbar-user" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm rounded-lg md:hidden hover:bg-gray-100   dark:text-gray-400 dark:hover:bg-gray-700" aria-controls="navbar-user" aria-expanded="false" style="color: black; margin-top: -2.3rem;">
+      <span class="sr-only">Open main menu</span><br><br><br><br>
+      Scroll&nbsp;To&nbsp;▼</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </button>
+
+    <!-- Nav Links -->
+    <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-user" style="margin-top: -3.7rem;">
+      <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-300 md:dark:bg-gray-300 dark:border-gray-700">
+        <li><a href="#" class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500" aria-current="page" >Home</a></li>
+        <li><a href="#about" class="block py-2 px-3 text-gray-900 hover:bg-gray-100 rounded md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500">About</a></li>
+        <li><a href="#community" class="block py-2 px-3 text-gray-900 hover:bg-gray-100 rounded md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500">Community</a></li>
+        <li><a href="#socials" class="block py-2 px-3 text-gray-900 hover:bg-gray-100 rounded md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500">Socials</a></li>
+        <li><a href="#contact" class="block py-2 px-3 text-gray-900 hover:bg-gray-100 rounded md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const button = document.getElementById('user-menu-button');
+  const dropdown = document.getElementById('user-dropdown');
+
+  button.addEventListener('click', function (e) {
+    e.stopPropagation();
+    dropdown.classList.toggle('hidden');
+    this.classList.toggle('active');  // Animate hamburger
+  });
+
+  document.addEventListener('click', function (event) {
+    if (!button.contains(event.target) && !dropdown.contains(event.target)) {
+      dropdown.classList.add('hidden');
+      button.classList.remove('active');  // Reset hamburger animation
+    }
+  });
+</script>
+
+<!-- <section class="bg-white dark:bg-gray-100 bg-[url('https://flowbite.s3.amazonaws.com/docs/jumbotron/hero-pattern.svg')] dark:bg-[url('https://flowbite.s3.amazonaws.com/docs/jumbotron/hero-pattern-dark.svg')]">
+    <div class="py-8 px-4 mx-auto max-w-screen-xl flex flex-col items-center text-center lg:py-16">
+        <img src="bfaa.png" class="mb-6" alt="Flowbite Logo" style="padding-bottom: -300px;">
+        <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 lg:px-48 dark:text-gray-400" style="margin-top: -50px; color: black;">
+            <span style="font-size: 2rem;">“</span>No silence. No sponsors. No plan B.<span style="font-size: 2rem;">”</span><br><i>- The Black Flag Association</i>
+        </p><br>
+        <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+            <a href="#" class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+                View Latest Posts&nbsp;<i class="fa-solid fa-arrow-right"></i>
+            </a>
+            <a href="#" class="py-3 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                Learn More About Us&nbsp;<i class="fa-solid fa-arrow-down"></i>
+            </a>  
+        </div>
+    </div>
+</section> -->
+<br><br><br><br><br>
+
+<div id="animation-carousel" class="relative w-full p-0" data-carousel="static" style = "padding: 0;">
+    <div class="relative h-56 overflow-hidden rounded-lg md:h-96 full w-full">
+        <div class="hidden duration-200 ease-linear" data-carousel-item>
+            <img src="https://picsum.photos/1200/500" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+        </div>
+        <div class="hidden duration-200 ease-linear" data-carousel-item>
+            <img src="https://picsum.photos/1200/500" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+        </div>
+
+        <div class="hidden duration-200 ease-linear" data-carousel-item="active">
+            <img src="https://picsum.photos/1200/500" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+        </div>
+       
+        <div class="hidden duration-200 ease-linear" data-carousel-item>
+            <img src="https://picsum.photos/1200/500" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+        </div>
+        
+        <div class="hidden duration-200 ease-linear" data-carousel-item>
+            <img src="https://picsum.photos/1200/500" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+        </div>
+    </div>
+    
+    <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full ">
+            <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+            </svg>
+            <span class="sr-only">Previous</span>
+        </span>
+    </button>
+    <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full ">
+            <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+            </svg>
+            <span class="sr-only">Next</span>
+        </span>
+    </button>
+</div>
+
+
+<section class="bg-white dark:bg-gray-100" id="about">
+    <div class="py-1 px-1 mx-auto flex flex-col items-center text-center lg:py-16">
+        <img src="assets/logo/bfaa.png" class="mb-6" alt="Flowbite Logo" style="padding-bottom: -300px;">
+    </div>
+</section>
+
+<span class="py-1 px-1 mx-auto flex flex-col items-center text-center lg:py-16" style="color: black; font-size: 2.5rem;">
+  <i class="fa-solid fa-arrow-down fa-bounce"></i>
+</span>
+<br>
+<h1 class="py-1 px-1 mx-auto flex flex-col items-center text-center lg:py-16" style="color: black; font-size: 2.5rem; font-family: 'M PLUS Rounded 1c', sans-serif; font-weight: bold;">
+  About the Black Flag Association
+</h1>
+
+<p class="py-1 px-1 mx-auto flex flex-col items-center text-center lg:py-16" style="color: black; font-size: 1.4rem;">
+Black Flag Association is a group of builders, riders, and problem-makers doing things our own way — sometimes brilliantly, sometimes badly,
+but always together.
+<br>
+
+We started with the idea that tech shouldn't be quiet. So we built a programmable horn. Loud. Obnoxious. Pointless to some — but not to us.<br>
+Because for us, it was never just about the product. It was about what it meant: building something dumb, fun, and genuinely ours.
+<br>
+From there, we kept building. Kept filming. Kept turning ideas into real, physical things — even if they caught fire, snapped off, or needed duct
+tape to survive.<br> Somewhere in the process, we became more than just a project team. B.F.A. turned into a space where we could throw out
+ideas, <br>push each other to make them real, and let the world watch us figure it out.
+<br><br>
+We aren’t influencers. We aren’t engineers in lab coats. We're just a team of people who love making noise,<br> breaking things, and occasionally
+getting it right in the process.<br> You’ll see us in the workshop, on the road, behind the camera, or passed out next to a soldering iron.
+Some of what we do is serious. <br>Most of it isn’t.
+But everything we do is genuine — because we build like we live:<br><br><i>no filters, no scripts, no backup plans.</i><br>
+B.F.A. stands for defiance — of bland products, of silent bikes, of doing things by the book.
+It's not about rebellion for the sake of it. <br>It’s about showing people they can build their own version of everything — and not wait around for
+permission.
+<br>
+
+So if you’re here, good.
+If you’re watching, better.
+<br>
+If you’re building with us — you’re part of it.
+Black Flag Association.<br>
+No silence. No sponsors. No plan B.</p>
+
+<br>
+<hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700" style="margin: 5rem;">
+
+<h1 class="py-1 px-1 mx-auto flex flex-col items-center text-center lg:py-16" style="color: black; font-size: 2.5rem; font-family: 'M PLUS Rounded 1c', sans-serif; font-weight: bold;" id="community">
+  Join the Community. Build Together.
+</h1>
+<br>
+<div class="py-1 px-1 mx-auto flex flex-col items-center text-center lg:py-16">
+  <i class="fa-brands fa-reddit" style="color: #e64500; font-size: 4rem;"></i>
+    <h1 style="color: black; font-size: 1.5rem;">r/B.F.A — The Forum</h1>
+    <p style="color: black; font-size: 1.2rem;">Short-form. Fast help. Real knowledge.<br>Whether you're building something wild or troubleshooting a dead circuit, this is the hub for shared progress.</p>
+    <a href="https:reddit.com/r/B.F.A" style="padding: 5px; border-radius: 5px; font-size: 1.1rem;">Click here to join</a>
+    <br>
+  <i class="fa-brands fa-telegram" style="color: #00ccff; font-size: 4rem;"></i>
+    <h1 style="color: black; font-size: 1.5rem;">Telegram — The Broadcast</h1>
+    <p style="color: black; font-size: 1.2rem;">Behind the scenes. Drops. First looks.<br> Think of it as mission control — raw updates and exclusive announcements straight from HQ.</p>
+    <a href="https:reddit.com/r/B.F.A" style="padding: 5px; border-radius: 5px; font-size: 1.1rem;">Click here to join</a>
+    <br>
+
+  <i class="fa-brands fa-discord" style="color: #7289da; font-size: 4rem;"></i>
+    <h1 style="color: black; font-size: 1.5rem;">Discord — The Network</h1>
+    <p style="color: black; font-size: 1.2rem;">A living directory of doers.<br>Artists, engineers, editors, thinkers.<br>Your profile speaks your craft.<br>Find collaborators. Build teams. Launch your own missions.</p></div>
+    <a href="https:reddit.com/r/B.F.A" style="padding: 5px; border-radius: 5px; font-size: 1.1rem; margin-left: 55rem;">Click here to join</a>
+</div>
+<hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700" style="margin: 5rem;">
+
+<h1 class="py-1 px-1 mx-auto flex flex-col items-center text-center lg:py-16" style="color: black; font-size: 2.5rem; font-family: 'M PLUS Rounded 1c', sans-serif; font-weight: bold;" id="socials">
+  Follow Us
+</h1>
+  <h1 class="py-1 px-1 mx-auto flex flex-col items-center text-center lg:py-16" style="color: black; font-size: 1.5rem;">Follow us along the journey, follow our socials to get the most recent updates.</h1>
+  <br><br><br><br><br><br><br><br><br><br>
+<div class="py-1 px-1 mx-auto flex flex-col items-center text-center lg:py-16" style="display: flex; flex-direction: column; gap: 10px; margin-left: 0; padding-top: 12rem; height: -20rem; margin-top: -24rem;">
+  <div class=""style="display: flex; align-items: center; margin-left: -9rem;">
+    <img src="assets/socials/instagram.png" style="transform: scale(0.15); padding: 0;" alt="Instagram Logo" />
+    <a href="https://instagram.com" style="
+      margin-left: 10px;
+      padding: 8px 16px;
+      background: linear-gradient(to right,#833ab4,#fd1d1d,#fcb045);
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 1.3rem;
+      font-weight: bold;
+      display: inline-block;
+      margin-left: -10rem;
+      transition: background-color 0.3s ease;
+    " onmouseover="this.style.backgroundColor='#2f7cd8'" onmouseout="this.style.backgroundColor='#3897f0'">
+      Follow our Instagram
+    </a>
+  </div>
+
+  <div style="display: flex; align-items: center; height: 10rem; margin-top: -14rem; margin-left: -9rem;">
+    <img src="assets/socials/tiktok.png" style="transform: scale(0.15); padding: 0; " alt="TikTok Logo" />
+    <a href="https://tiktok.com" style="
+      margin-left: 10px;
+      padding: 8px 16px;
+      background-color: #000000;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 1.3rem;
+      font-weight: bold;
+      display: inline-block;
+      margin-left: -10rem;
+      transition: background-color 0.3s ease;
+    " onmouseover="this.style.backgroundColor='#222222'" onmouseout="this.style.backgroundColor='#000000'">
+      Follow our TikTok
+    </a>
+  </div>
+
+  <div style="display: flex; align-items: center; padding: 0px; height: 4rem; margin-left: -9rem;">
+    <img src="assets/socials/youtube.png" style="transform: scale(0.15); padding: 0;" alt="YouTube Logo" />
+    <a href="https://youtube.com" style="
+      margin-left: 10px;
+      padding: 8px 16px;
+      background-color: #ff0000;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin-left: -10rem;
+      display: inline-block;
+      transition: background-color 0.3s ease;
+    " onmouseover="this.style.backgroundColor='#cc0000'" onmouseout="this.style.backgroundColor='#ff0000'">
+      Follow our YouTube
+    </a>
+  </div>
+</div>
+
+<br>
+<hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700" style="margin: 5rem;">
+<h1 class="flex flex-col items-center text-center lg:py-16" style="color: black; font-size: 2.5rem; font-family: 'M PLUS Rounded 1c', sans-serif; font-weight: bold; margin-left: -1rem;" id="contact">
+  &nbsp;&nbsp;Contact Us.
+</h1>
+
+<br><br><br>
+<div class="w-full max-w-md bg-white dark:bg-gray-300 border border-gray-200 dark:border-gray-300 shadow-sm rounded-lg p-5 py-1 px-1 mx-auto flex flex-col lg:py-16" style="transform: scale(1.2);">
+    <h2 class="text-lg font-semibold text-gray-900 dark:text-black mb-2">Contact details</h2>
+    <address class="relative bg-gray-50 dark:bg-gray-400 dark:border-gray-600 p-4 rounded-lg border border-gray-200 not-italic grid grid-cols-2">
+        <div class="space-y-2 text-gray-900 dark:text-gray-900 leading-loose hidden sm:block">
+            Name: <br />
+            Email: <br />
+            Phone Number:
+        </div>
+        <div id="contact" class="space-y-2 text-gray-900 dark:text-white font-medium leading-loose">
+            Your Name <br/>
+            email@email.com <br/>
+            + 12 345 67890
+        </div>
+        </button>
+    </address>
+</div>
+
+<hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700" style="margin: 5rem;">
+<footer class="bg-white rounded-lg shadow-sm dark:bg-gray-100 m-4">
+    <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
+        <div class="sm:flex sm:items-center sm:justify-between">
+            <a href="https://flowbite.com/" class="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
+                <img src="bfaLogo.png" class="h-3" alt="BFA Logo" />
+            </a>
+            <ul class="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
+                <li>
+                    <a href="#about" class="hover:underline me-4 md:me-6" style="padding: 5px;">About</a>
+                </li>
+                <li>
+                    <a href="#" class="hover:underline me-4 md:me-6" style="padding: 5px;">Privacy Policy</a>
+                </li>
+                <li>
+                    <a href="#" class="hover:underline me-4 md:me-6" style="padding: 5px;">Licensing</a>
+                </li>
+                <li>
+                    <a href="#contact" class="hover:underline" style="padding: 5px;">Contact</a>
+                </li>
+            </ul>
+        </div>
+        <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-900">© 2023 <a href="https://flowbite.com/" class="hover:underline" style="padding: 5px;">Black Flag Association(BFA)™</a>. All Rights Reserved. 2025</span>
+    </div>
+</footer>
+
